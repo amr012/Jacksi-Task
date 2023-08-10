@@ -47,6 +47,7 @@ class AddProductScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
             const  Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -80,55 +81,84 @@ class AddProductScreen extends StatelessWidget {
               CustomTextFormField(label: "اسم المنتج", controller: productNameController,title: "اسم المنتج",),
               CustomTextFormField(label: "اسم المتجر", controller: productNameController,title: "اسم المتجر",),
               CustomTextFormField(label: "السعر", controller: productNameController,title: "السعر",),
-              SizedBox(
-                height: 60,
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    //hint:'',
-                    dropdownColor: Colors.white,isExpanded: true,
-                    alignment: Alignment.centerRight,
-
-                    hint: Text("اسم التصنيف",style: TextStyle(
-                        fontSize: 15,color: darkGreyColor
-                    ),),
-                    icon: Padding(
-                      padding: EdgeInsetsDirectional.only(start: 20),
-                      child: Icon(
-                        Icons.arrow_drop_down_circle_outlined,
-                        color: blueColor,
-                      ),
-                    ),value: section,
-                    style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.black,
-                    ),
-
-                    // value: isSignLang,
-                    onChanged: (newValue) {
-                      section = newValue;
-                      // setState(() {
-                      //   isSignLang = newValue!;
-                      //   print(signLang.indexOf(newValue));
-                      //   signLangValue = signLang.indexOf(newValue)  ;
-                      //   print(signLangValue);
-                      //
-                      // });
-                    },
-                    items:
-                    sectionList.map<DropdownMenuItem<String>>((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(
-                          valueItem,
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: darkGreyColor
-                          ),
-                        ),
-                      );
-                    }).toList(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Text(
+                  "التصنيف",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold
                   ),
                 ),
+              ),
+
+              SizedBox(
+                height: 60,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
+                    border: Border.all(color: lightGreyColor)
+                  ),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        //hint:'',
+                        dropdownColor: Colors.white,
+                        isExpanded: true,
+                        alignment: Alignment.centerRight,
+
+                        hint: Text("اسم التصنيف",style: TextStyle(
+                            fontSize: 15,color: blueColor
+                        ),),
+                        icon: Padding(
+                          padding: EdgeInsetsDirectional.only(start: 20),
+                          child: Icon(
+                            Icons.arrow_drop_down_circle_outlined,
+                            color: blueColor,
+                          ),
+                        ),value: section,
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          color: Colors.black,
+                        ),
+
+                        // value: isSignLang,
+                        onChanged: (newValue) {
+                          section = newValue;
+                          // setState(() {
+                          //   isSignLang = newValue!;
+                          //   print(signLang.indexOf(newValue));
+                          //   signLangValue = signLang.indexOf(newValue)  ;
+                          //   print(signLangValue);
+                          //
+                          // });
+                        },
+                        items:
+                        sectionList.map<DropdownMenuItem<String>>((valueItem) {
+                          return DropdownMenuItem(
+                            value: valueItem,
+                            child: Text(
+                              valueItem,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: darkGreyColor
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                child: CustomRoundedButton(title: "اضافة المنتج", onPressed: (){
+
+                }),
               )
             ],
           ),
