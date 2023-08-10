@@ -13,7 +13,7 @@ class CustomRoundedButton extends StatelessWidget {
       height: 48,
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25)
+          borderRadius: BorderRadius.circular(12)
       ),
       child: Text(title,style: TextStyle(color: Colors.white,
 

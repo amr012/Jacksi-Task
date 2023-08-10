@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:jacksi_task/custom_widgets/custom_round_button.dart';
+import 'package:jacksi_task/custom_widgets/custom_text_from_field.dart';
+
+import '../../utils/colors/colors.dart';
 
 class AddProductScreen extends StatelessWidget {
-  const AddProductScreen({Key? key}) : super(key: key);
+   AddProductScreen({Key? key}) : super(key: key);
+
+   TextEditingController productNameController = TextEditingController();
+   TextEditingController shopNameController = TextEditingController();
+   TextEditingController priceController = TextEditingController();
+   List<String> sectionList = ["تصنيف 1","تصنيف 2", "تصنيف 3"];
+   String? section;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
+        backgroundColor: backgroundColor,
         title: Text(
           "اضافه منتجات",
           style: TextStyle(
@@ -31,16 +43,96 @@ class AddProductScreen extends StatelessWidget {
         )] ,
       ),
 
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Text("صور المنتج",style: TextStyle(fontSize: 16),),
+            const  Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text("صور المنتج",style: TextStyle(fontSize: 16),),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 100,
+                child: Row(
+                  children: [
+                    Expanded(child: Image.asset("assets/images/test_image.png")),
+                    SizedBox(width: 2,),
+                    Expanded(child: Image.asset("assets/images/test_image.png")),
+                    SizedBox(width: 2,),
+                    Expanded(child: Image.asset("assets/images/test_image.png")),
+                    SizedBox(width: 2,),
+                    Expanded(child: Image.asset("assets/images/test_image.png")),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0,bottom: 15),
+                child: CustomRoundedButton(title: "اضغط لاضافه الصور", onPressed: (){
+
+                }),
+              ),
+              CustomTextFormField(label: "اسم المنتج", controller: productNameController,title: "اسم المنتج",),
+              CustomTextFormField(label: "اسم المتجر", controller: productNameController,title: "اسم المتجر",),
+              CustomTextFormField(label: "السعر", controller: productNameController,title: "السعر",),
+              SizedBox(
+                height: 60,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    //hint:'',
+                    dropdownColor: Colors.white,isExpanded: true,
+                    alignment: Alignment.centerRight,
+
+                    hint: Text("اسم التصنيف",style: TextStyle(
+                        fontSize: 15,color: darkGreyColor
+                    ),),
+                    icon: Padding(
+                      padding: EdgeInsetsDirectional.only(start: 20),
+                      child: Icon(
+                        Icons.arrow_drop_down_circle_outlined,
+                        color: blueColor,
+                      ),
+                    ),value: section,
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      color: Colors.black,
+                    ),
+
+                    // value: isSignLang,
+                    onChanged: (newValue) {
+                      section = newValue;
+                      // setState(() {
+                      //   isSignLang = newValue!;
+                      //   print(signLang.indexOf(newValue));
+                      //   signLangValue = signLang.indexOf(newValue)  ;
+                      //   print(signLangValue);
+                      //
+                      // });
+                    },
+                    items:
+                    sectionList.map<DropdownMenuItem<String>>((valueItem) {
+                      return DropdownMenuItem(
+                        value: valueItem,
+                        child: Text(
+                          valueItem,
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: darkGreyColor
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              )
             ],
           ),
-
-        ],
+        ),
       ),
     );
   }
