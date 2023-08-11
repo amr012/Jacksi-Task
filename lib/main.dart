@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jacksi_task/screens/products_screen/products_screen.dart';
+import 'package:jacksi_task/screens/splash_screen/splash_screen.dart';
 import 'package:jacksi_task/utils/bloc_observer/bloc_observer.dart';
 
 void main() async {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: ProductsScreen(),
+      home: SplashScreen(),
     );
   }
 }

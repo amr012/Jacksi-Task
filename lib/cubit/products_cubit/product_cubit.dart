@@ -16,10 +16,10 @@ class ProductCubit extends Cubit<ProductStates> {
   bool isVertical = true;
 
   addProduct(File image, String productName, String shopName, String price,
-      String section) async {
+      String section,String code) async {
     try {
       emit(LoadingState());
-      final imageURL = await uploadImage(image, "123456");
+      final imageURL = await uploadImage(image, code);
       await fireStore.collection("products").add({
         "imageURL": imageURL,
         "productName": productName,

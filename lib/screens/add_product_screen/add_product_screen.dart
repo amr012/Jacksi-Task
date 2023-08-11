@@ -110,7 +110,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("صور المنتج",style: TextStyle(fontSize: 16),),
+                          Text("صور المنتج",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700),),
                         ],
                       ),
                     ),
@@ -121,7 +121,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         child: Row(
 
                           children: [
-                            pickedImage!.isEmpty  ? GestureDetector(
+                           pickedImage == null || pickedImage!.isEmpty  ? GestureDetector(
                                 onTap: () async {
                                   await _openImagePicker();
                                 },
@@ -244,7 +244,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   section = newValue;
 
                                 });
-       
+
                               },
                               items:
                               sectionList.map<DropdownMenuItem<String>>((valueItem) {
@@ -292,7 +292,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             }
                             else{
                               productCubit!.addProduct(_image!, productNameController.text
-                                  , shopNameController.text, priceController.text, section!);
+                                  , shopNameController.text, priceController.text, section!,pickedImage![0]!.name);
                             }
                           }
 

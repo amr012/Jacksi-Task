@@ -54,7 +54,7 @@ class ProductsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("التصنيفات",style: TextStyle(fontSize: 16),),
+                  Text("التصنيفات",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700),),
                 ],
               ),
               SizedBox(height: 10,),
@@ -147,7 +147,14 @@ class ProductsScreen extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            Image.asset("assets/images/section1.png"),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: mainColor,
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                width: double.infinity,
+                                child: SvgPicture.asset("assets/icons/element4.svg")),
                             SizedBox(height: 5,),
                             Text("عرض الكل",textAlign: TextAlign.center,)
                           ],
@@ -179,11 +186,14 @@ class ProductsScreen extends StatelessWidget {
                 stream: sectionIndex == 0 ? productCubit!.getAllProducts() :productCubit!.getAllProductsBySection(section!) ,
                 builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator(color: mainColor,);
+                    return const Padding(
+                      padding:  EdgeInsets.only(top: 100.0),
+                      child: CircularProgressIndicator(color: mainColor,),
+                    );
                   }
 
                   return productCubit!.isVertical ? Expanded(
@@ -287,53 +297,6 @@ class ProductsScreen extends StatelessWidget {
                   );
                 },
               ),
-              // Expanded(
-              //   child: ListView.builder(
-              //       itemCount: 10,
-              //       itemBuilder: (context,index){
-              //         return Padding(
-              //           padding: const EdgeInsets.only(bottom: 8.0),
-              //           child: SizedBox(
-              //             height: 120,
-              //             child: Row(
-              //               mainAxisAlignment:MainAxisAlignment.end,
-              //               children: [
-              //                 Padding(
-              //                   padding: const EdgeInsets.only(right: 8.0),
-              //                   child: Column(
-              //                     crossAxisAlignment: CrossAxisAlignment.end,
-              //                     children: [
-              //                       Expanded(child: Text("تغيير عرض المنتجات الى أفقى",style: TextStyle(fontSize: 18,color: Colors.black),)),
-              //                       Expanded(
-              //                           child: Row(
-              //                             mainAxisAlignment: MainAxisAlignment.start,
-              //                             children: [
-              //                               Text("دولار",style: TextStyle(fontSize: 14,color: Colors.black),),
-              //                               Padding(
-              //                                 padding: const EdgeInsets.only(left: 8.0),
-              //                                 child: Text("120",style: TextStyle(fontSize: 20,color: mainColor),),
-              //                               ),
-              //                             ],
-              //                           )),
-              //                       SizedBox(height: 5,),
-              //                       Container(
-              //                           padding: EdgeInsets.all(7),
-              //                           decoration: BoxDecoration(
-              //                               color: lightGreyColor,
-              //                               borderRadius: BorderRadius.circular(10)
-              //                           ),
-              //                           child: Text("اسم المتجر",style: TextStyle(fontSize: 10,color: darkGreyColor),)),
-              //                     ],
-              //                   ),
-              //                 ),
-              //                 Image.asset("assets/images/test_image.png",height: 115,width: 115,),
-              //
-              //               ],
-              //             ),
-              //           ),
-              //         );
-              //       }),
-              // )
 
             ],
           ),
