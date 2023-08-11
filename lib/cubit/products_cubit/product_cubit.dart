@@ -13,6 +13,7 @@ class ProductCubit extends Cubit<ProductStates> {
   final fireStore = FirebaseFirestore.instance;
   String? section;
   int sectionIndex = 0;
+  bool isVertical = true;
 
   addProduct(File image, String productName, String shopName, String price,
       String section) async {
@@ -52,5 +53,10 @@ class ProductCubit extends Cubit<ProductStates> {
     section = currentSection;
     sectionIndex = currentSectionIndex;
     emit(ChangeSectionState());
+  }
+
+  changeStyleDirection(){
+    isVertical = !isVertical;
+    emit(ChangeStyleState());
   }
 }

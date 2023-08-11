@@ -10,4 +10,6 @@ class AddProductError extends ProductInitialState{}
 
 class ChangeSectionState extends ProductInitialState{}
 
+class ChangeStyleState extends ProductInitialState{}
+
 

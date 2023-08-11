@@ -116,21 +116,56 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     SizedBox(
                       height: 100,
-                      child: Row(
-                        children: [
-                          Expanded(child: _image == null ? GestureDetector(
-                              onTap: () async {
-                                await _openImagePicker();
-                              },
-                              child: Container(color:  Colors.white,)) :
-                          Image.file(_image!)),
-                          SizedBox(width: 2,),
-                          Expanded(child: Image.asset("assets/images/test_image.png")),
-                          SizedBox(width: 2,),
-                          Expanded(child: Image.asset("assets/images/test_image.png")),
-                          SizedBox(width: 2,),
-                          Expanded(child: Image.asset("assets/images/test_image.png")),
-                        ],
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: Row(
+
+                          children: [
+                            pickedImage!.isEmpty  ? GestureDetector(
+                                onTap: () async {
+                                  await _openImagePicker();
+                                },
+                                child: Container(color:  Colors.white,
+                                height: 100,
+                                width: 100,
+                                child: Icon(Icons.add),)) :
+                            SizedBox(
+                              height: 100,
+                              width: 300,
+                              child: ListView.builder(
+                                itemCount: pickedImage!.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context,index){
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  child: Stack(
+                                    children: [
+                                      Image.file(File(pickedImage![index]!.path),height: 100,width: 100,),
+                                      Positioned(
+                                         left: 12,
+                                      top: 8,
+                                          child: GestureDetector(
+                                            onTap : (){
+                                              setState(() {
+                                                pickedImage!.removeAt(index);
+
+                                              });
+                                            } ,
+                                            child: Container(
+                                              decoration :BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.red.withOpacity(.4)
+                                              ),
+                                                child: Icon(Icons.close,color: Colors.white,size: 20,)),
+                                          ))
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ),
+
+                          ],
+                        ),
                       ),
                     ),
                     Padding(
@@ -153,6 +188,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         }
                       },),
                     CustomTextFormField(label: "السعر", controller: priceController,title: "السعر",
+                      keyboardType: TextInputType.number,
                       validator: (value){
                         if(value!.isEmpty){
                           return "مطلوب" ;
@@ -204,14 +240,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
                               // value: isSignLang,
                               onChanged: (newValue) {
-                                section = newValue;
-                                // setState(() {
-                                //   isSignLang = newValue!;
-                                //   print(signLang.indexOf(newValue));
-                                //   signLangValue = signLang.indexOf(newValue)  ;
-                                //   print(signLangValue);
-                                //
-                                // });
+                                setState(() {
+                                  section = newValue;
+
+                                });
+       
                               },
                               items:
                               sectionList.map<DropdownMenuItem<String>>((valueItem) {
@@ -281,14 +314,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
    File? _image;
    List images =[];
-
+    List<XFile?>?  pickedImage;
    Future<void> _openImagePicker() async {
-     final List<XFile?> pickedImage =
+      pickedImage =
      await _picker.pickMultiImage(maxHeight: 2000,maxWidth: 2000);
      if (pickedImage != null) {
        setState(() {
-         _image = File(pickedImage.first!.path);
-         images = pickedImage;
+         _image = File(pickedImage!.first!.path);
+
          // addImageDialog(context);
        });
      }
