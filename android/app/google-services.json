@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "905022483721",
+    "project_id": "jacksi-task",
+    "storage_bucket": "jacksi-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905022483721:android:b3250c6df68acaea6df7d8",
+        "android_client_info": {
+          "package_name": "com.example.jacksi_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905022483721-c75lqhgnd3hr60trmnhkacb8qtbsut11.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ84Wjfc2Y4oPSPS3sOd5ngw3xhku--mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905022483721-c75lqhgnd3hr60trmnhkacb8qtbsut11.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
